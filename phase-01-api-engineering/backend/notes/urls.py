@@ -1,7 +1,8 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
-from .views import NoteListView
+from .views import NoteViewSet
 
-urlpatterns = [
-    path("notes/", NoteListView.as_view()),
-]
+router = DefaultRouter()
+router.register('notes', NoteViewSet)
+
+urlpatterns = router.urls
