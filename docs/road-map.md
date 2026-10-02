@@ -386,4 +386,4 @@ A production-capable Python/Django backend curriculum. Not built around VTU or a
 
 - Never skip the practical project for a phase.
 - Never move to the next phase until the current project works, is tested, and you can rebuild its core piece from memory.
-- Keep domain-specific work (payments, VTU, provider architecture) out of the core phases. It belongs only in Phase 14.
+- Keep domain-specific work (payments, VTU, provider architecture) out of the core phases. It belongs only in Phase 14..
