@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.middleware.csrf import get_token
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -17,7 +18,7 @@ class SessionLoginView(APIView):
             )
 
         login(request, user)
-        request.session.set_expiry(60*60)
+        request.session.set_expiry(60 * 60)
         return Response({"message": "Login successfully"}, status=status.HTTP_200_OK)
 
 
@@ -40,4 +41,14 @@ class SessionMeView(APIView):
 
         return Response(
             {"authenticated": False, "username": None}, status=status.HTTP_200_OK
+        )
+
+
+class SessionCsrfView(APIView):
+    def get(self, request):
+        csrf_token = get_token(request)
+
+        return Response(
+            {"csrfToken": csrf_token},
+            status=status.HTTP_200_OK,
         )
