@@ -20,8 +20,6 @@ class TokenLoginView(APIView):
 
         token, created = Token.objects.get_or_create(user=user)
 
-        
-
         return Response({"token": token.key}, status=status.HTTP_200_OK)
 
 
@@ -30,10 +28,21 @@ class TokenMeView(APIView):
     authentication_classes = [TokenAuthentication]
 
     def get(self, request):
-         return Response(
-        {
-            "authenticated": True,
-            "username": request.user.username,
-        },
-        status=status.HTTP_200_OK,
-    )
+        return Response(
+            {
+                "authenticated": True,
+                "username": request.user.username,
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
+class TokenLogoutView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+
+        request.auth.delete()
+
+        return Response({"message": "Logout successfully"}, status=status.HTTP_200_OK)

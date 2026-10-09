@@ -6,7 +6,7 @@ from .session_views import (
     SessionLogoutView,
     SessionMeView,
 )
-from .token_views import TokenLoginView, TokenMeView
+from .token_views import TokenLoginView, TokenLogoutView, TokenMeView
 
 urlpatterns = [
     path("session/login/", SessionLoginView.as_view()),
@@ -16,8 +16,8 @@ urlpatterns = [
     # authtoken
     path("token/login/", TokenLoginView.as_view()),
     path("token/me/", TokenMeView.as_view()),
+    path("token/logout/", TokenLogoutView.as_view()),
 ]
-
 
 
 # {
