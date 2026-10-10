@@ -422,28 +422,28 @@ Logout
 ## Progress
 
 
-[x] Authentication fundamentals
-[x] Django User model basics
-[x] Password hashing concept
-[x] create_user()
-[x] set_password()
-[x] check_password()
-[x] authenticate()
-[x] Authentication backend
-[x] login()
-[x] logout()
-[x] request.user
-[x] is_authenticated
-[x] Session authentication
-[x] Cookie, session and session ID distinction
-[x] Token authentication concept
-[x] JWT basic structure
-[x] Access token concept
-[x] Refresh token concept
-[x] Token expiration concept
-[x] Registration concept
-[x] Login concept
-[x] Password handling concept
+- [x] Authentication fundamentals
+- [x] Django User model basics
+- [x] Password hashing concept
+- [x] create_user()
+- [x] set_password()
+- [x] check_password()
+- [x] authenticate()
+- [x] Authentication backend
+- [x] login()
+- [x] logout()
+- [x] request.user
+- [x] is_authenticated
+- [x] Session authentication
+- [x] Cookie, session and session ID distinction
+- [x] Token authentication concept
+- [x] JWT basic structure
+- [x] Access token concept
+- [x] Refresh token concept
+- [x] Token expiration concept
+- [x] Registration concept
+- [x] Login concept
+- [x] Password handling concept
 
 ## Implementation Status
 
