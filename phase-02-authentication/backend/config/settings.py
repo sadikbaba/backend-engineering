@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     "accounts",
     "corsheaders",
     "rest_framework.authtoken",
+    "rest_framework_simplejwt.token_blacklist",
 ]
 
 # drf-spectacular
@@ -150,3 +152,8 @@ CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:5173",
 ]
+
+SIMPLE_JWT = { 
+    "ACCESS_TOKEN_LIFETIME" : timedelta(minutes=1),
+ 
+}
