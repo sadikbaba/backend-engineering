@@ -421,7 +421,7 @@ Logout
 
 ## Progress
 
-```text
+
 [x] Authentication fundamentals
 [x] Django User model basics
 [x] Password hashing concept
@@ -445,18 +445,25 @@ Logout
 [x] Login concept
 [x] Password handling concept
 
-[ ] Implement registration endpoint
-[ ] Implement JWT login
-[ ] Generate access and refresh tokens
-[ ] Authenticate API requests with access tokens
-[ ] Implement refresh-token endpoint
-[ ] Implement logout flow
-[ ] Test valid credentials
-[ ] Test invalid credentials
-[ ] Test expired access token
-[ ] Test token refresh
-[ ] Complete Phase 2 review from memory
-```
+## Implementation Status
+
+### Backend Implemented and tested
+
+- [x] Session authentication
+- [x] DRF token authentication
+- [x] JWT login
+- [x] JWT registration
+- [x] Protected JWT endpoint
+- [x] Access token refresh
+- [x] JWT logout with refresh-token blacklisting
+- [x] Expired access-token testing
+
+### Still in progress
+
+- [ ] JWT frontend integration
+- [ ] Final authentication concept review
+- [ ] Phase 2 exit check
+
 
 ## Phase Completion Requirement
 
