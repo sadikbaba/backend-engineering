@@ -140,7 +140,7 @@ app.insertAdjacentHTML(
       Token not checked yet.
     </p>
   </main>
-`
+`,
 );
 
 const tokenLoginForm = document.querySelector("#token-login-form");
@@ -193,3 +193,170 @@ checkTokenButton.addEventListener("click", showTokenStatus);
 tokenLogoutButton.addEventListener("click", handleTokenLogout);
 
 showTokenStatus();
+
+// jwt authentication
+import {
+  loginJWT,
+  getJWTUser,
+  refreshJWT,
+  logoutJWT,
+  registerJWT,
+} from "./auth/jwt.js";
+
+app.insertAdjacentHTML(
+  "beforeend",
+  `
+  <main>
+    <h1>JWT Authentication</h1>
+
+    <form id="jwt-register-form">
+  <input
+    id="jwt-register-username"
+    type="text"
+    placeholder="New username"
+    required
+  />
+
+  <input
+    id="jwt-register-password"
+    type="password"
+    placeholder="New password"
+    required
+  />
+
+  <button type="submit">
+    Register
+  </button>
+</form>
+
+    <form id="jwt-login-form">
+      <input
+        id="jwt-username"
+        type="text"
+        placeholder="Username"
+        required
+      />
+
+      <input
+        id="jwt-password"
+        type="password"
+        placeholder="Password"
+        required
+      />
+
+      <button type="submit">
+        Login
+      </button>
+    </form>
+
+    <button id="check-jwt-button">
+      Check JWT User
+    </button>
+
+    <button id="refresh-jwt-button">
+      Refresh Access Token
+    </button>
+
+    <button id="jwt-logout-button">
+      Logout
+    </button>
+
+    <p id="jwt-status">
+      JWT not checked yet.
+    </p>
+  </main>
+`,
+);
+
+const jwtLoginForm = document.querySelector("#jwt-login-form");
+const jwtUsernameInput = document.querySelector("#jwt-username");
+const jwtPasswordInput = document.querySelector("#jwt-password");
+
+const checkJWTButton = document.querySelector("#check-jwt-button");
+const refreshJWTButton = document.querySelector("#refresh-jwt-button");
+const jwtLogoutButton = document.querySelector("#jwt-logout-button");
+
+const jwtStatus = document.querySelector("#jwt-status");
+
+const jwtRegisterForm = document.querySelector("#jwt-register-form");
+const jwtRegisterUsernameInput = document.querySelector(
+  "#jwt-register-username",
+);
+const jwtRegisterPasswordInput = document.querySelector(
+  "#jwt-register-password",
+);
+
+async function showJWTStatus() {
+  const result = await getJWTUser();
+
+  if (!result.success) {
+    jwtStatus.textContent = result.message;
+    return;
+  }
+
+  jwtStatus.textContent = `Logged in as ${result.user.username}`;
+}
+
+async function handleJWTLogin(event) {
+  event.preventDefault();
+
+  const username = jwtUsernameInput.value;
+  const password = jwtPasswordInput.value;
+
+  const result = await loginJWT(username, password);
+
+  if (!result.success) {
+    jwtStatus.textContent = result.message;
+    return;
+  }
+
+  await showJWTStatus();
+}
+
+async function handleJWTRefresh() {
+  const result = await refreshJWT();
+
+  if (!result.success) {
+    jwtStatus.textContent = result.message;
+    return;
+  }
+
+  jwtStatus.textContent = "Access token refreshed successfully";
+}
+
+async function handleJWTLogout() {
+  const result = await logoutJWT();
+
+  if (!result.success) {
+    jwtStatus.textContent = result.message;
+    return;
+  }
+
+  jwtStatus.textContent = result.message;
+}
+
+
+
+async function handleJWTRegister(event) {
+  event.preventDefault();
+
+  const username = jwtRegisterUsernameInput.value;
+  const password = jwtRegisterPasswordInput.value;
+
+  const result = await registerJWT(username, password);
+
+  if (!result.success) {
+    jwtStatus.textContent = result.message;
+    return;
+  }
+
+  jwtStatus.textContent = `${result.message}: ${result.username}`;
+}
+
+refreshJWTButton.addEventListener("click", handleJWTRefresh);
+jwtLoginForm.addEventListener("submit", handleJWTLogin);
+checkJWTButton.addEventListener("click", showJWTStatus);
+jwtLogoutButton.addEventListener("click", handleJWTLogout);
+jwtRegisterForm.addEventListener("submit", handleJWTRegister);
+
+showJWTStatus();
