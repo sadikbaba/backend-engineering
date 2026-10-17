@@ -44,13 +44,9 @@ class JWTLogoutView(APIView):
         try:
             refresh_token = request.data.get("refresh")
             if not refresh_token:
-                return Response({
-                    "message" : "Refresh token is required"
-                },status=400)
+                return Response({"message": "Refresh token is required"}, status=400)
             token = RefreshToken(refresh_token)
             token.blacklist()
-            return Response({"message" : "Logout successfully"}, status=200)
+            return Response({"message": "Logout successfully"}, status=200)
         except TokenError as error:
-            return Response({
-                "message" : str(error)
-            }, status=400)
+            return Response({"message": str(error)}, status=400)
