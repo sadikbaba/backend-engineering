@@ -1,8 +1,11 @@
 from rest_framework import status, viewsets
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from .models import Note
+from .permissions import IsOwnerOrAdmin, NoteModelPermissions
 from .serializers import NoteSerializer
 
 
@@ -108,5 +111,10 @@ class NoteListView(APIView):
 #
 # The router maps HTTP methods and URLs to these actions.
 class NoteViewSet(viewsets.ModelViewSet):
+    authentication_classes = [JWTAuthentication]  # noqa: RUF012
+    permission_classes = [IsAuthenticated, NoteModelPermissions, IsOwnerOrAdmin]  # noqa: RUF012
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
