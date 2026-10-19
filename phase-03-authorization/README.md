@@ -39,15 +39,15 @@ Add permission checks so users can only perform actions they are allowed to perf
 
 ## Progress
 
-- [ ] DRF permission classes
-- [ ] Object-level permissions
-- [ ] Role-based access
-- [ ] Server-side enforcement rule
-- [ ] Add roles to the API
-- [ ] Add object-level checks
-- [ ] Test allowed and denied requests
-- [ ] Document the implementation
-- [ ] Phase 3 exit check
+- [x] DRF permission classes
+- [x] Object-level permissions
+- [x] Role-based access
+- [x] Server-side enforcement rule
+- [x] Add roles to the API
+- [x] Add object-level checks
+- [x] Test allowed and denied requests
+- [x] Document the implementation
+- [x] Phase 3 exit check
 
 ## Completion Requirement
 
