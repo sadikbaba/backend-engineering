@@ -1,12 +1,14 @@
 from rest_framework import status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.throttling import UserRateThrottle
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from .models import Note
 from .permissions import IsOwnerOrAdmin, NoteModelPermissions
 from .serializers import NoteSerializer
+from .throttles import NoteCreateThrottle
 
 
 # Manual APIView version.
@@ -115,6 +117,12 @@ class NoteViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, NoteModelPermissions, IsOwnerOrAdmin]  # noqa: RUF012
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+    throttle_classes = [UserRateThrottle]  # noqa: RUF012
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def get_throttles(self):
+        if self.action == "create":
+            return [UserRateThrottle(), NoteCreateThrottle()]
+        return [UserRateThrottle()]

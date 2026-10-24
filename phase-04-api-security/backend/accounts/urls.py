@@ -26,9 +26,7 @@ urlpatterns = [
     path("jwt/refresh/", TokenRefreshView.as_view()),
     path("jwt/register/", JWTRegisterView.as_view()),
     path("jwt/logout/", JWTLogoutView.as_view()),
-
-# roles
+    # roles
     path("roles/assign/", AssignRoleView.as_view()),
     path("roles/remove/", RemoveRoleView.as_view()),
 ]
-

@@ -98,6 +98,6 @@ class RemoveRoleView(APIView):
         target_user.groups.remove(role)
 
         return Response(
-           {"detail":"User role updated."},
+            {"detail": "User role updated."},
             status=200,
         )

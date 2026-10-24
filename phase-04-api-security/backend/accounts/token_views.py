@@ -24,8 +24,8 @@ class TokenLoginView(APIView):
 
 
 class TokenMeView(APIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated] # noqa: RUF012
+    authentication_classes = [TokenAuthentication] # noqa: RUF012
 
     def get(self, request):
         return Response(

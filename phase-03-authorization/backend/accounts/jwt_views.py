@@ -22,22 +22,6 @@ class JWTMeView(APIView):
         )
 
 
-class JWTRegisterView(APIView):
-    def post(self, request):
-        serializer = RegisterSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(
-                {
-                    "message": "User registered successfully",
-                    "username": serializer.data["username"],
-                },
-                status=201,
-            )
-        return Response(serializer.errors, status=400)
-
-
 class JWTLogoutView(APIView):
     def post(self, request):
 
