@@ -11,9 +11,7 @@ class NoteSerializer(serializers.ModelSerializer):
 
     def validate_title(self, value):
         if len(value) > 100:
-            raise serializers.ValidationError(
-                "Title must be less than 100 characters"
-            )
+            raise serializers.ValidationError("Title must be less than 100 characters")
 
         if len(value) < 3:
             raise serializers.ValidationError("Title must be at least 3 characters")

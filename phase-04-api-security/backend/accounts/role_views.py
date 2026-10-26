@@ -1,16 +1,22 @@
 from django.contrib.auth.models import Group, User
+from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from .permissions import IsAppAdmin
+from .serializers import RoleRequestSerializer, RoleResponseSerializer
 
 
 class AssignRoleView(APIView):
+    serializer_class = RoleRequestSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsAppAdmin]
 
+    @extend_schema(
+        request=RoleRequestSerializer, responses={200: RoleResponseSerializer}
+    )
     def post(self, request):
         username = request.data.get("username")
         role_name = request.data.get("role")
@@ -56,9 +62,13 @@ class AssignRoleView(APIView):
 
 
 class RemoveRoleView(APIView):
+    serializer_class = RoleRequestSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsAppAdmin]
 
+    @extend_schema(
+        request=RoleRequestSerializer, responses={200: RoleResponseSerializer}
+    )
     def post(self, request):
         username = request.data.get("username")
         role_name = request.data.get("role")

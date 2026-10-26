@@ -6,13 +6,21 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import RegisterSerializer
+from .serializers import (
+    CurrentUserSerializer,
+    LogoutSerializer,
+    RegisterResponseSerializer,
+    RegisterSerializer,
+)
 
 
 class JWTMeView(APIView):
+    serializer_class = CurrentUserSerializer
+
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
 
+    @extend_schema(responses={200: CurrentUserSerializer})
     def get(self, request):
 
         return Response(
@@ -24,7 +32,12 @@ class JWTMeView(APIView):
 
 
 class JWTRegisterView(APIView):
-    @extend_schema(request=RegisterSerializer)
+    serializer_class = RegisterSerializer
+
+    @extend_schema(
+        request=RegisterSerializer,
+        responses={201: RegisterResponseSerializer},
+    )
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
 
@@ -41,6 +54,9 @@ class JWTRegisterView(APIView):
 
 
 class JWTLogoutView(APIView):
+    serializer_class = LogoutSerializer
+
+    @extend_schema(request=LogoutSerializer)
     def post(self, request):
 
         try:
