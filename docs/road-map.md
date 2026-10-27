@@ -318,7 +318,7 @@ A production-capable Python/Django backend curriculum. Not built around VTU or a
 - Phase 14: domain capstone
 
 ### Portfolio Checklist
-- [ ] Phase 1 to 4 API with JWT auth, roles, and a documented OWASP-style security pass
+- [x] Phase 1 to 4 API with JWT auth, roles, and a documented OWASP-style security pass
 - [ ] Phase 5 to 7 API with optimized queries, transactions, and a fixed race condition
 - [ ] Phase 8 external API integration plus a signed webhook receiver
 - [ ] Phase 9 Redis caching plus a Celery background job
@@ -328,7 +328,7 @@ A production-capable Python/Django backend curriculum. Not built around VTU or a
 - [ ] Phase 14 domain capstone (VTU or similar)
 
 ### GitHub Project Checklist (per repo)
-- [ ] README with problem statement, architecture summary, and why each tool was chosen
+- [x] README with problem statement, architecture summary, and why each tool was chosen
 - [ ] Setup instructions that work from a fresh clone
 - [ ] .gitignore correctly excluding secrets and build artifacts
 - [ ] Meaningful commit history
@@ -336,7 +336,7 @@ A production-capable Python/Django backend curriculum. Not built around VTU or a
 - [ ] API docs (OpenAPI/Swagger link or screenshot)
 
 ### Interview Preparation Checklist
-- [ ] Can explain JWT access vs refresh tokens
+- [x] Can explain JWT access vs refresh tokens
 - [ ] Can explain a real race condition you fixed and how locking solved it
 - [ ] Can explain idempotency and why it matters for money-moving endpoints
 - [ ] Can explain how you would design and verify a webhook receiver
