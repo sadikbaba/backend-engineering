@@ -237,6 +237,6 @@ Mark a module complete only after the learner has demonstrated the stated exit s
 - [x] Module 5: Transactions and Data Correctness
 - [x] Module 6: Working with PostgreSQL
 - [x] Module 7: Indexes and Query Performance
-- [ ] Module 8: Connecting PostgreSQL to Django
-- [ ] Foundation completion project
-- [ ] Original Backend Engineering Phase 5 objectives
+- [x] Module 8: Connecting PostgreSQL to Django
+- [x] Foundation completion project
+- [x] Original Backend Engineering Phase 5 objectives
