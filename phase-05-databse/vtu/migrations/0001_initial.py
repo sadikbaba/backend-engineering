@@ -6,25 +6,31 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [  # noqa: RUF012
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('user_id', models.AutoField(primary_key=True, serialize=False)),
-                ('bio', models.TextField(blank=True, default='bio')),
-                ('phone', models.TextField(blank=True, unique=True)),
-                ('created_at', models.DateTimeField(blank=True, db_default=django.db.models.functions.datetime.Now(), default=django.utils.timezone.now, null=True)),
-                ('name', models.TextField(blank=True)),
+                ("user_id", models.AutoField(primary_key=True, serialize=False)),
+                ("bio", models.TextField(blank=True, default="bio")),
+                ("phone", models.TextField(blank=True, unique=True)),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        blank=True,
+                        db_default=django.db.models.functions.datetime.Now(),
+                        default=django.utils.timezone.now,
+                        null=True,
+                    ),
+                ),
+                ("name", models.TextField(blank=True)),
             ],
             options={
-                'db_table': 'vtu_profile',
-                'indexes': [models.Index(fields=['name'], name='profile_name_index')],
+                "db_table": "vtu_profile",
+                "indexes": [models.Index(fields=["name"], name="profile_name_index")],
             },
         ),
     ]

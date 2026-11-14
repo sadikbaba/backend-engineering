@@ -32,3 +32,5 @@ htmlcov/
 
 # code format
 .ruff_cache
+
+follow.md
