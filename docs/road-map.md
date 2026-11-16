@@ -329,15 +329,15 @@ A production-capable Python/Django backend curriculum. Not built around VTU or a
 
 ### GitHub Project Checklist (per repo)
 - [x] README with problem statement, architecture summary, and why each tool was chosen
-- [ ] Setup instructions that work from a fresh clone
-- [ ] .gitignore correctly excluding secrets and build artifacts
-- [ ] Meaningful commit history
-- [ ] Passing tests, ideally with a CI badge
-- [ ] API docs (OpenAPI/Swagger link or screenshot)
+- [x] Setup instructions that work from a fresh clone
+- [x] .gitignore correctly excluding secrets and build artifacts
+- [x] Meaningful commit history
+- [x] Passing tests, ideally with a CI badge
+- [x] API docs (OpenAPI/Swagger link or screenshot)
 
 ### Interview Preparation Checklist
 - [x] Can explain JWT access vs refresh tokens
-- [ ] Can explain a real race condition you fixed and how locking solved it
+- [x] Can explain a real race condition you fixed and how locking solved it
 - [ ] Can explain idempotency and why it matters for money-moving endpoints
 - [ ] Can explain how you would design and verify a webhook receiver
 - [ ] Can explain when to use caching vs a background job
