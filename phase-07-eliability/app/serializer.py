@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Product, Order
+from .models import Order, Product
 
 
 class CreateOrderSerializer(serializers.Serializer):
@@ -21,3 +21,9 @@ class OrderSerializer(serializers.ModelSerializer):
         ]
 
         read_only_fields = ["id", "user", "status", "created_at"]  # noqa: RUF012
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = "__all__"  # or list specific fields like ["id", "name", "price"]

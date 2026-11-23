@@ -1,15 +1,15 @@
 import hashlib
 import json
 
-from django.db import transaction, IntegrityError
+from django.db import IntegrityError, transaction
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from .models import IdempotencyRecord, Order, Product
-from .serializer import CreateOrderSerializer, OrderSerializer
+from .serializer import CreateOrderSerializer, OrderSerializer, ProductSerializer
 
 
 class CreateOrderView(APIView):
@@ -34,7 +34,12 @@ class CreateOrderView(APIView):
 
         user = request.user
 
-        payload_string = json.dumps(validated_data, sort_keys=True)
+        fingerprint_payload = {
+            "product_id": product.pk,
+            "quantity": quantity,
+        }
+
+        payload_string = json.dumps(fingerprint_payload, sort_keys=True)
         payload_hash = hashlib.sha256(payload_string.encode("utf-8")).hexdigest()
 
         existing_record = IdempotencyRecord.objects.filter(
@@ -116,16 +121,16 @@ class CancelOrderView(APIView):
             except Order.DoesNotExist:
                 return Response(
                     {"error": "Order not found or unauthorized."},
-                    status=status.HTTP_200_OK,
+                    status=status.HTTP_404_NOT_FOUND,
                 )
 
-            if order.status == "CANCELLED":
+            if order.status == Order.Status.CANCELLED:
                 return Response(
                     {"message": "Order is already cancelled."},
                     status=status.HTTP_200_OK,
                 )
 
-            if order.status != "PENDING":
+            if order.status != Order.Status.PENDING:
                 return Response(
                     {"error": f"Cannot cancel an order with status '{order.status}'."},
                     status=status.HTTP_400_BAD_REQUEST,
@@ -135,10 +140,19 @@ class CancelOrderView(APIView):
             product_obj.stock += order.quantity
             product_obj.save(update_fields=["stock"])
 
-            order.status = "CANCELLED"
+            order.status = Order.Status.CANCELLED
             order.save(update_fields=["status"])
 
             return Response(
                 {"message": "Order cancelled successfully and stock restored."},
                 status=status.HTTP_200_OK,
             )
+
+
+class ProductView(APIView):
+    permission_classes =[AllowAny]
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+
+        return Response({"products": serializer.data}, status=status.HTTP_200_OK)
