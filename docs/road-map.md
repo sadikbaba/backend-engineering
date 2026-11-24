@@ -319,7 +319,7 @@ A production-capable Python/Django backend curriculum. Not built around VTU or a
 
 ### Portfolio Checklist
 - [x] Phase 1 to 4 API with JWT auth, roles, and a documented OWASP-style security pass
-- [ ] Phase 5 to 7 API with optimized queries, transactions, and a fixed race condition
+- [x] Phase 5 to 7 API with optimized queries, transactions, and a fixed race condition
 - [ ] Phase 8 external API integration plus a signed webhook receiver
 - [ ] Phase 9 Redis caching plus a Celery background job
 - [ ] Phase 10 test suite covering auth, permissions, idempotency, and webhooks
